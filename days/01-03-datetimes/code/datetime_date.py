@@ -36,6 +36,10 @@ christmas
 
 # We need to use != & == rather than is / is not for comparison. Sorry for the mistake in the video.
 if christmas != today_date:
-    print("Sorry there are still " + str((christmas - today_date).days) + " until Christmas!")
+    print(
+        "Sorry there are still "
+        + str((christmas - today_date).days)
+        + " until Christmas!"
+    )
 else:
     print("Yay it's Christmas!")
