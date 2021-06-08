@@ -27,7 +27,6 @@ class Dragon(Creature):
 
 
 class Wizard(Creature):
-
     def attack(self, creature):
         my_roll = self.defensive_roll()
         their_roll = creature.defensive_roll()

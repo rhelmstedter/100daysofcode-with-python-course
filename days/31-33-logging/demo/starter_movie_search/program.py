@@ -3,11 +3,11 @@ import requests.exceptions
 
 
 def main():
-    keyword = input('Keyword of title search: ')
+    keyword = input("Keyword of title search: ")
     try:
         results = api.find_movie_by_title(keyword)
 
-        print(f'There are {len(results)} movies found.')
+        print(f"There are {len(results)} movies found.")
         for r in results:
             print(f"{r.title} with code {r.imdb_code} has score {r.imdb_score}")
     except requests.exceptions.ConnectionError:
@@ -18,5 +18,5 @@ def main():
         print("Oh that didn't work!: {}".format(x))
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

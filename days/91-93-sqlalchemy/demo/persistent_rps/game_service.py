@@ -2,10 +2,13 @@ from typing import List, Optional
 
 # noinspection PyPackageRequirements
 from data import session_factory
+
 # noinspection PyPackageRequirements
 from models.move import Move
+
 # noinspection PyPackageRequirements
 from models.player import Player
+
 # noinspection PyPackageRequirements
 from models.roll import Roll
 
@@ -13,10 +16,12 @@ from models.roll import Roll
 def get_game_history(game_id: str) -> List[Move]:
     session = session_factory.create_session()
 
-    query = session.query(Move)\
-        .filter(Move.game_id == game_id)\
-        .order_by(Move.roll_number)\
+    query = (
+        session.query(Move)
+        .filter(Move.game_id == game_id)
+        .order_by(Move.roll_number)
         .all()
+    )
 
     moves = list(query)
 
@@ -28,10 +33,12 @@ def get_game_history(game_id: str) -> List[Move]:
 def get_win_count(player: Player) -> int:
     session = session_factory.create_session()
 
-    wins = session.query(Move) \
-        .filter(Move.player_id == player.id). \
-        filter(Move.is_winning_play) \
+    wins = (
+        session.query(Move)
+        .filter(Move.player_id == player.id)
+        .filter(Move.is_winning_play)
         .count()
+    )
 
     session.close()
 
@@ -63,7 +70,9 @@ def all_players() -> List[Player]:
     return players
 
 
-def record_roll(player, roll: 'Roll', game_id: str, is_winning_play: bool, roll_num: int):
+def record_roll(
+    player, roll: "Roll", game_id: str, is_winning_play: bool, roll_num: int
+):
     session = session_factory.create_session()
 
     move = Move()
@@ -89,7 +98,7 @@ def all_rolls() -> List[Roll]:
     return rolls
 
 
-def find_roll(name: str) -> Optional['Roll']:
+def find_roll(name: str) -> Optional["Roll"]:
     session = session_factory.create_session()
 
     roll = session.query(Roll).filter(Roll.name == name).first()
@@ -98,7 +107,7 @@ def find_roll(name: str) -> Optional['Roll']:
     return roll
 
 
-def create_roll(name: str) -> 'Roll':
+def create_roll(name: str) -> "Roll":
     session = session_factory.create_session()
 
     roll = Roll()

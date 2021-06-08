@@ -23,9 +23,13 @@ def main():
     print("The wettest 5 days:")
 
     for idx, d in enumerate(wet_days[:5]):
-        print("{}. {} inches of rain on {}".format(idx + 1, d.actual_precipitation, d.date))
+        print(
+            "{}. {} inches of rain on {}".format(
+                idx + 1, d.actual_precipitation, d.date
+            )
+        )
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     for _ in range(1, 100):
         main()

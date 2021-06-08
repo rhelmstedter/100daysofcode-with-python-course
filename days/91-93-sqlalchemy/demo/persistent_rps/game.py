@@ -29,10 +29,12 @@ def game_loop(player1, player2, rolls):
             p2_wins += 1
 
         final_move = count >= 5 and p1_wins != p2_wins
-        game_service.record_roll(player1, p1_roll, game_id,
-                                 p1_wins > p2_wins and final_move, count)
-        game_service.record_roll(player2, p2_roll, game_id,
-                                 p2_wins > p1_wins and final_move, count)
+        game_service.record_roll(
+            player1, p1_roll, game_id, p1_wins > p2_wins and final_move, count
+        )
+        game_service.record_roll(
+            player2, p2_roll, game_id, p2_wins > p1_wins and final_move, count
+        )
 
         print()
         print(player1.name + " throws " + p1_roll.name)

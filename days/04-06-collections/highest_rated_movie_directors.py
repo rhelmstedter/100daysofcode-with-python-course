@@ -35,28 +35,27 @@ directors = get_movies_by_director()
 ##}
 
 
-##{
-cnt = Counter()
-for director, movies in directors.items():
-    cnt[director] += len(movies)
-
-cnt.most_common(5)
-##}
-
 def get_average_scores(directors):
     '''Filter directors with < MIN_MOVIES and calculate averge score'''
-    pass
+    for director, movies in directors:
+        if len(movies) < MIN_MOVIES:
+            directors.pop(director)
+        else:
+            directors[director].append(_calc_mean(movies))
+    return directors
 
 
 def _calc_mean(movies):
     '''Helper method to calculate mean of list of Movie namedtuples'''
-    pass
+    return round(sum([movie.score for movie in movies])/len(movies), 1)
 
 
-def print_results(directors):
+def print_results(directors, average_scores):
     '''Print directors ordered by highest average rating. For each director
     print his/her movies also ordered by highest rated movie.
     See http://pybit.es/codechallenge13.html for example output'''
+    for director, average_scores in average_scores:
+        print()
     fmt_director_entry = '{counter}. {director:<52} {avg}'
     fmt_movie_entry = '{year}] {title:<50} {score}'
     sep_line = '-' * 60
@@ -65,10 +64,10 @@ def print_results(directors):
 def main():
     '''This is a template, feel free to structure your code differently.
     We wrote some tests based on our solution: test_directors.py'''
-    director = get_movies_by_director()
-    directors = get_average_scores(directors)
-    print_results(directors)
+    directors = get_movies_by_director()
+    average_scores = get_average_scores(directors)
+    print_results(directors, average_scores)
 
 
 if __name__ == '__main__':
-    main()s
+    main()

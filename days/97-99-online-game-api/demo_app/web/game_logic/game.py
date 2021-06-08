@@ -7,9 +7,14 @@ from game_logic.models.roll import Roll
 
 
 class GameRound:
-
-    def __init__(self, game_id: str, player1: Player, player2: Player,
-                 p1_roll: Roll, p2_roll: Roll):
+    def __init__(
+        self,
+        game_id: str,
+        player1: Player,
+        player2: Player,
+        p1_roll: Roll,
+        p2_roll: Roll,
+    ):
         self.p2_roll = p2_roll
         self.p1_roll = p1_roll
         self.game_id = game_id
@@ -36,14 +41,26 @@ class GameRound:
         self.record_roll(d.reversed(), self.player2, self.p2_roll, self.player2_wins)
 
         print("RECORDING ROUND")
-        print("Player 1: {}, prior wins {}, outcome: {}".format(self.p1_roll.name, self.player1_wins, d))
-        print("Player 2: {}, prior wins {}, outcome: {}".format(self.p2_roll.name, self.player2_wins, d.reversed()))
+        print(
+            "Player 1: {}, prior wins {}, outcome: {}".format(
+                self.p1_roll.name, self.player1_wins, d
+            )
+        )
+        print(
+            "Player 2: {}, prior wins {}, outcome: {}".format(
+                self.p2_roll.name, self.player2_wins, d.reversed()
+            )
+        )
         print()
 
         self.is_over = game_service.is_game_over(self.game_id)
 
-    def record_roll(self, decision: Decision, player: Player, roll: Roll, win_count: int):
-        final_round_candidate = self.round >= self.PLAY_COUNT_MIN and win_count + 1 >= self.WIN_COUNT_MIN
+    def record_roll(
+        self, decision: Decision, player: Player, roll: Roll, win_count: int
+    ):
+        final_round_candidate = (
+            self.round >= self.PLAY_COUNT_MIN and win_count + 1 >= self.WIN_COUNT_MIN
+        )
         wins_game = final_round_candidate and decision == Decision.win
 
         game_service.record_roll(player, roll, self.game_id, wins_game, self.round)

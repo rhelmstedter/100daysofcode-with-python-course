@@ -27,7 +27,9 @@ def all_players() -> List[Player]:
     return []
 
 
-def record_roll(player, roll: 'Roll', game_id: str, is_winning_play: bool, roll_num: int):
+def record_roll(
+    player, roll: "Roll", game_id: str, is_winning_play: bool, roll_num: int
+):
     move = Move()
     # move.player_id = player.id
     # move.roll_id = roll.id
@@ -43,12 +45,12 @@ def all_rolls() -> List[Roll]:
     pass
 
 
-def find_roll(name: str) -> Optional['Roll']:
+def find_roll(name: str) -> Optional["Roll"]:
     # TODO: Find roll
     pass
 
 
-def create_roll(name: str) -> 'Roll':
+def create_roll(name: str) -> "Roll":
     roll = Roll(name)
     # TODO: Save
     return roll

@@ -3,11 +3,14 @@ from typing import List, Optional
 
 # noinspection PyPackageRequirements
 from game_logic import session_factory, game_decider
+
 # noinspection PyPackageRequirements
 from game_logic.game_decider import Decision
 from game_logic.models.move import Move
+
 # noinspection PyPackageRequirements
 from game_logic.models.player import Player
+
 # noinspection PyPackageRequirements
 from game_logic.models.roll import Roll
 
@@ -15,10 +18,12 @@ from game_logic.models.roll import Roll
 def get_game_history(game_id: str) -> List[Move]:
     session = session_factory.create_session()
 
-    query = session.query(Move) \
-        .filter(Move.game_id == game_id) \
-        .order_by(Move.roll_number) \
+    query = (
+        session.query(Move)
+        .filter(Move.game_id == game_id)
+        .order_by(Move.roll_number)
         .all()
+    )
 
     moves = list(query)
 
@@ -35,10 +40,12 @@ def is_game_over(game_id: str) -> bool:
 def get_win_count(player: Player) -> int:
     session = session_factory.create_session()
 
-    wins = session.query(Move) \
-        .filter(Move.player_id == player.id). \
-        filter(Move.is_winning_play) \
+    wins = (
+        session.query(Move)
+        .filter(Move.player_id == player.id)
+        .filter(Move.is_winning_play)
         .count()
+    )
 
     session.close()
 
@@ -79,7 +86,9 @@ def all_players() -> List[Player]:
     return players
 
 
-def record_roll(player, roll: 'Roll', game_id: str, is_winning_play: bool, roll_num: int):
+def record_roll(
+    player, roll: "Roll", game_id: str, is_winning_play: bool, roll_num: int
+):
     session = session_factory.create_session()
 
     move = Move()
@@ -117,7 +126,7 @@ def init_rolls(rolls: List[str]):
         create_roll(roll_name)
 
 
-def find_roll(name: str) -> Optional['Roll']:
+def find_roll(name: str) -> Optional["Roll"]:
     session = session_factory.create_session()
 
     roll = session.query(Roll).filter(Roll.name == name).first()
@@ -126,7 +135,7 @@ def find_roll(name: str) -> Optional['Roll']:
     return roll
 
 
-def create_roll(name: str) -> 'Roll':
+def create_roll(name: str) -> "Roll":
     session = session_factory.create_session()
 
     roll = Roll()
@@ -175,4 +184,3 @@ def count_round_wins(player_id: int, game_id: str) -> int:
             wins += 1
 
     return wins
-
