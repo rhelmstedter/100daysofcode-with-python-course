@@ -1,0 +1,5 @@
+user_move,rock,paper,scissors
+Rock,tie,lose,win
+Paper,win,tie,lose
+Scissors,lose,win,tie
+
