@@ -11,7 +11,11 @@ t.days
 t.seconds
 # 36000
 
+<<<<<<< HEAD
+t.hours
+=======
 # t.hours
+>>>>>>> 60eac8a6bae1374766b1a0f00190f693b7c2b298
 # Traceback (most recent call last):
 # File "<pyshell#119>", line 1, in <module> t.hours
 # AttributeError: 'datetime.timedelta' object has no attribute 'hours'
