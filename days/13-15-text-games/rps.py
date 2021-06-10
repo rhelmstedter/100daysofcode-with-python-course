@@ -46,7 +46,7 @@ def print_header():
 
 
 def game_loop(player1, player2, BEST_OF_NUM=3):
-    while max([player1.wins, player2.wins]) < BEST_OF_NUM-1:
+    while max([player1.wins, player2.wins]) < BEST_OF_NUM - 1:
         try:
             p1_turn = get_user_selection()
         except ValueError as e:
@@ -64,13 +64,14 @@ def game_loop(player1, player2, BEST_OF_NUM=3):
 
 victories = defaultdict(list)
 with open("data/battle-table.csv", "r") as csvfile:
-    fieldnames = "Attacker,Rock,Gun,Lightning,Devil,Dragon,Water,Air,Paper,Sponge,Wolf,Tree,Human,Snake,Scissors,Fire".split( ",")
+    fieldnames = "Attacker,Rock,Gun,Lightning,Devil,Dragon,Water,Air,Paper,Sponge,Wolf,Tree,Human,Snake,Scissors,Fire".split(
+        ","
+    )
     for line in csv.DictReader(csvfile, fieldnames=fieldnames):
         action = line["Attacker"]
         for fieldname in fieldnames:
             if line[fieldname] == "win":
                 victories[action].append(fieldname)
-
 
 
 def determine_winner(p1_turn, p2_turn, player1, player2, victories):
