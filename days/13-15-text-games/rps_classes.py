@@ -17,7 +17,7 @@ class Player:
         self.wins = wins
 
 
-# parses the csv for possible actions and possible victories
+# parses the csv for possible actions and victories
 victories = defaultdict(list)
 with open("data/battle-table.csv", "r") as csvfile:
     headers = csv.DictReader(csvfile).fieldnames

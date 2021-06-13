@@ -1,10 +1,11 @@
 import itertools
 import sys
 import time
+import random
 
-symbols = itertools.cycle("-\|/")
+lights = itertools.cycle(['green', 'yellow', 'red'])
 
 while True:
-    sys.stdout.write("\r" + next(symbols))
+    sys.stdout.write("\r" + next(lights))
     sys.stdout.flush()
-    time.sleep(0.1)
+    time.sleep(random.randint(3, 5)*10)

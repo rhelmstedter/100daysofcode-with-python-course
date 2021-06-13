@@ -5,10 +5,8 @@ import random
 colours = "Red Green Amber".split()
 rotation = itertools.cycle(colours)
 
-
 def rg_timer():
     return random.randint(3, 7)
-
 
 def light_rotation(rotation):
     for colour in rotation:
