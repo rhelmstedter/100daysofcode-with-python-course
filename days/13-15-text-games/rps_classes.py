@@ -51,6 +51,7 @@ def print_header():
     print("  15-way Rock Paper Scissors")
     print("=" * 30)
 
+
 def best_of(player1):
     print(f"Welcome {player1.name}!\n")
     while True:
@@ -58,13 +59,16 @@ def best_of(player1):
             best_of_num = int(input("Enter an odd number of rounds to play:"))
             if best_of_num % 2 == 0:
                 raise EvenNumberException
-            print(f"OK {player1.name}, let's play best of {best_of_num} rounds. Good Luck!\n")
+            print(
+                f"OK {player1.name}, let's play best of {best_of_num} rounds. Good Luck!\n"
+            )
             break
         except ValueError:
             print("You did not enter an number.\n")
         except EvenNumberException:
-            print("You entered an even number which means the match could end in a tie.\n")
-            
+            print(
+                "You entered an even number which means the match could end in a tie.\n"
+            )
     return best_of_num
 
 
@@ -88,6 +92,7 @@ def game_loop(player1, player2, BEST_OF_NUM):
         time.sleep(0.25)
         p2_turn = get_computers_selection()
         print(f"The Computer chose {p2_turn.action}")
+
         determine_winner(p1_turn, p2_turn, player1, player2, victories)
         get_score(player1, player2)
         input("Press ENTER to move to the next round.")
